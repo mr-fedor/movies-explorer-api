@@ -29,6 +29,7 @@ app.use(requestLogger);
 
 app.use(auth);
 app.use('/users', require('./routes/users'));
+app.use('/movies', require('./routes/movies'));
 
 app.use((req, res, next) => {
   const error = new Error('Страница не найдена');
