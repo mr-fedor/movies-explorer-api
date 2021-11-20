@@ -1,0 +1,71 @@
+const User = require('../models/user');
+
+module.exports.getProfile = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        const error = new Error('Пользователь не найден.');
+        error.statusCode = 404;
+
+        return next(error);
+      }
+
+      return res.status(200).send({
+        name: user.name, email: user.email, _id: user._id,
+      });
+    })
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new Error('Передан неккоректный id');
+        error.statusCode = 400;
+
+        return next(error);
+      }
+
+      const error = new Error('Error 500');
+      error.statusCode = 500;
+
+      return next(error);
+    });
+};
+
+module.exports.updateProfile = (req, res, next) => {
+  const { name, email } = req.body;
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    { name, email },
+    { new: true, runValidators: true },
+  )
+    .then((user) => {
+      if (!user) {
+        const error = new Error('Пользователь не найден.');
+        error.statusCode = 404;
+
+        return next(error);
+      }
+
+      return res.status(200).send({
+        name: user.name, email: user.email, _id: user._id,
+      });
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        const error = new Error('Переданы некорректные данные при обновлении профиля.');
+        error.statusCode = 400;
+
+        return next(error);
+      }
+      if (err.name === 'CastError') {
+        const error = new Error('Передан неккоректный id');
+        error.statusCode = 400;
+
+        return next(error);
+      }
+
+      const error = new Error('Error 500');
+      error.statusCode = 500;
+
+      return next(error);
+    });
+};

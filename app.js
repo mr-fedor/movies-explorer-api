@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const auth = require('./middlewares/auth');
 
 const PORT = 3000;
 const app = express();
@@ -25,6 +26,9 @@ const options = {
 app.use('*', cors(options));
 app.use(express.json());
 app.use(requestLogger);
+
+app.use(auth);
+app.use('/users', require('./routes/users'));
 
 app.use((req, res, next) => {
   const error = new Error('Страница не найдена');
