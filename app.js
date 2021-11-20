@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const PORT = 3000;
 const app = express();
@@ -23,5 +24,20 @@ const options = {
 
 app.use('*', cors(options));
 app.use(express.json());
+app.use(requestLogger);
+
+app.use((req, res, next) => {
+  const error = new Error('Страница не найдена');
+  error.statusCode = 404;
+
+  return next(error);
+});
+
+app.use(errorLogger);
+
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).send({ message: err.message || 'Error 500' });
+  next();
+});
 
 app.listen(PORT, () => {});
