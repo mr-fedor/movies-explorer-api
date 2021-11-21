@@ -22,6 +22,8 @@ const options = {
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://blinov-api.nomoredomains.work',
+    'https://blinov-api.nomoredomains.work',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,

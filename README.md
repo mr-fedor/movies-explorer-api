@@ -10,4 +10,4 @@ API для дипломного проекта 26 потока в рамках �
 - POST /movies - создаёт фильм с переданными в теле country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId
 - DELETE /movies/movieId - удаляет сохранённый фильм по id
 
-URL API - [https://blinov-api.nomoredomains.work](htpps://blinov-api.nomoredomains.work)
+URL API - [https://blinov-api.nomoredomains.work](https://blinov-api.nomoredomains.work)
