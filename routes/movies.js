@@ -14,7 +14,7 @@ router.post('/', celebrate({
     country: Joi.string().min(2).required(),
     director: Joi.string().min(2).required(),
     duration: Joi.number().required(),
-    year: Joi.number().min(4).max(4).required(),
+    year: Joi.number().precision(4).required(),
     description: Joi.string().required(),
     image: Joi.string().required().custom((value, helper) => {
       if (validator.isURL(value, { require_protocol: true })) {
