@@ -14,7 +14,7 @@ router.post('/', celebrate({
     country: Joi.string().min(2).required(),
     director: Joi.string().min(2).required(),
     duration: Joi.number().required(),
-    year: Joi.number().precision(4).required(),
+    year: Joi.number().length(4).required(),
     description: Joi.string().required(),
     image: Joi.string().required().custom((value, helper) => {
       if (validator.isURL(value, { require_protocol: true })) {
@@ -37,7 +37,7 @@ router.post('/', celebrate({
 
       return helper.message('Введите валидный url, например: https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png');
     }),
-    movieId: Joi.string().length(24).hex().required(),
+    movieId: Joi.number().length(10).required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
