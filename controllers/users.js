@@ -48,7 +48,7 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const error = new Error('Переданы некорректные данные при обновлении профиля.');
-        error.statusCode = 400;
+        error.statusCode = 4;
 
         return next(error);
       }
@@ -80,7 +80,7 @@ module.exports.createUser = (req, res, next) => {
         return next(error);
       }
 
-      if (err.name === 'MongoServerError' && err.code === 11000) {
+      if (err.code === 11000) {
         const error = new Error('Передан e-mail уже существующий в базе');
         error.statusCode = 409;
 
