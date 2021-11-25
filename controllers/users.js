@@ -17,14 +17,7 @@ module.exports.getProfile = (req, res, next) => {
         name: user.name, email: user.email, _id: user._id,
       });
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        const error = new Error('Передан неккоректный id');
-        error.statusCode = 400;
-
-        return next(error);
-      }
-
+    .catch(() => {
       const error = new Error('Error 500');
       error.statusCode = 500;
 
@@ -55,12 +48,6 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const error = new Error('Переданы некорректные данные при обновлении профиля.');
-        error.statusCode = 400;
-
-        return next(error);
-      }
-      if (err.name === 'CastError') {
-        const error = new Error('Передан неккоректный id');
         error.statusCode = 400;
 
         return next(error);

@@ -75,14 +75,7 @@ module.exports.deleteMovie = (req, res, next) => {
 
       return Movie.deleteOne(movie).then(() => res.status(200).send(movie));
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        const error = new Error('Передан неккоректный id');
-        error.statusCode = 400;
-
-        return next(error);
-      }
-
+    .catch(() => {
       const error = new Error('Error 500');
       error.statusCode = 500;
 
