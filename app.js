@@ -1,3 +1,4 @@
+const { NODE_ENV, DB } = process.env;
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,7 +9,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const PORT = 3000;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/moviesdb', {
+mongoose.connect(NODE_ENV === 'production' ? DB : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
