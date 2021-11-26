@@ -31,7 +31,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(
     req.user._id,
     { name, email },
-    { new: true, runValidators: true },
+    { new: false, runValidators: true },
   )
     .then((user) => {
       if (!user) {
@@ -48,6 +48,13 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const error = new Error('Переданы некорректные данные при обновлении профиля.');
+        error.statusCode = 400;
+
+        return next(error);
+      }
+
+      if (err.codeName === 'DuplicateKey') {
+        const error = new Error('Передан e-mail уже существующий в базе.');
         error.statusCode = 409;
 
         return next(error);
