@@ -61,7 +61,8 @@ const movieSchema = new mongoose.Schema({
   },
   movieId: {
     type: Number,
-    length: 10,
+    min: 1000000000,
+    max: 9999999999,
     required: true,
   },
   nameRU: {

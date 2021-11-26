@@ -37,7 +37,7 @@ router.post('/', celebrate({
 
       return helper.message('Введите валидный url, например: https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png');
     }),
-    movieId: Joi.string().length(10).pattern(/^[0-9]+$/),
+    movieId: Joi.number().min(1000000000).max(9999999999).required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
