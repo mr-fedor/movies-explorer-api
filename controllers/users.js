@@ -48,7 +48,7 @@ module.exports.updateProfile = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         const error = new Error('Переданы некорректные данные при обновлении профиля.');
-        error.statusCode = 4;
+        error.statusCode = 409;
 
         return next(error);
       }
