@@ -19,6 +19,8 @@ const options = {
     'http://localhost:3001',
     'http://blinov-api.nomoredomains.work',
     'https://blinov-api.nomoredomains.work',
+    'http://blinov-movies.nomoredomains.rocks',
+    'https://blinov-movies.nomoredomains.rocks'
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
