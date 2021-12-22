@@ -6,7 +6,7 @@ const { errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const PORT = 3000;
+const PORT = 3001;
 const app = express();
 
 mongoose.connect(NODE_ENV === 'production' ? DB : 'mongodb://localhost:27017/moviesdb', {
